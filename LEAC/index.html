@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEAC - Explora los Tesoros del Perú</title>
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <link rel="stylesheet" href="Styles/index.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+</head>
+<body class="bg-gray-50">
+    <div id="p5-canvas"></div>
+
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="index.html" class="flex items-center group cursor-pointer">
+                    <h1 class="font-display text-2xl font-bold text-primary group-hover:text-opacity-80 transition-colors">LEAC</h1>
+                    <span class="ml-2 text-sm text-gray-600">Explora Perú</span>
+                </a>
+
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-primary font-semibold">Inicio</a>
+                    <a href="destinos.html" class="text-gray-700 hover:text-primary transition-colors">Destinos</a>
+                    <a href="hoteles.html" class="text-gray-700 hover:text-primary transition-colors">Hoteles</a>
+                    <a href="perfil.html" class="text-gray-700 hover:text-primary transition-colors">Mi Perfil</a>
+                    <a href="contacto.html" class="text-gray-700 hover:text-primary transition-colors">Contáctanos</a>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <button id="loginBtn" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-colors text-sm md:text-base">
+                        Iniciar Sesión
+                    </button>
+                    
+                    <div id="userProfile" class="hidden flex items-center space-x-2">
+                        <img id="userAvatar" src="" alt="Avatar" class="w-8 h-8 rounded-full border border-gray-200">
+                        <div class="flex flex-col items-start leading-tight">
+                            <span id="userName" class="text-sm font-medium hidden md:block"></span>
+                            <span id="userLevel" class="px-2 py-0.5 text-[10px] rounded-full bg-secondary text-white font-bold tracking-wider uppercase"></span>
+                        </div>
+                        <button id="logoutBtn" class="ml-2 text-xs text-red-500 hover:text-red-700 font-medium hover:bg-red-50 px-2 py-1 rounded transition-colors" title="Cerrar Sesión">
+                            Salir ➜
+                        </button>
+                    </div>
+
+                    <button id="mobileMenuBtn" class="md:hidden text-gray-600 hover:text-primary focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full left-0 shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html" class="block px-3 py-2 text-primary font-semibold rounded-md hover:bg-gray-50">Inicio</a>
+                <a href="destinos.html" class="block px-3 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md">Destinos</a>
+                <a href="hoteles.html" class="block px-3 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md">Hoteles</a>
+                <a href="perfil.html" class="block px-3 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md">Mi Perfil</a>
+                <a href="contacto.html" class="block px-3 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md">Contáctanos</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
+        <div class="absolute inset-0 z-0">
+            <img src="img/Macchu_Picchu.jpg" 
+                 alt="Machu Picchu" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+        </div>
+        <div class="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
+            <h1 class="font-display text-4xl md:text-6xl lg:text-8xl font-bold mb-6 opacity-0" id="heroTitle">
+                Explora los Tesoros del Perú
+            </h1>
+            <p class="text-lg md:text-2xl mb-8 opacity-0" id="heroSubtitle">
+                Descubre la magia de la cultura incaica, la belleza natural y la aventura infinita
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center opacity-0" id="heroButtons">
+                <button id="btnComenzarAventura" class="bg-primary text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-opacity-90 transition-all transform hover:scale-105 shadow-lg">
+                    Comenzar Aventura
+                </button>
+
+                <button id="btnVerDestinos" class="border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 hover:bg-white hover:text-[#C65D00] transform hover:scale-105">
+                    Ver Destinos
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="destinos" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-3xl md:text-5xl font-bold text-primary mb-4">Destinos Destacados</h2>
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+                    Descubre los lugares más emblemáticos del Perú, desde las maravillas arqueológicas hasta la naturaleza virgen
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                    <div class="relative">
+                        <img src="img/Macchu_Picchuu.jpg" alt="Machu Picchu" class="w-full h-64 object-cover">
+                        <div class="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-sm font-semibold">Más Popular</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-2xl font-bold text-primary mb-2">Machu Picchu</h3>
+                        <p class="text-gray-600 mb-4">La maravilla del mundo moderno te espera con sus misteriosas ruinas incaicas.</p>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center"><span class="star-rating text-lg">★★★★★</span><span class="ml-2 text-sm text-gray-600">(4.9/5)</span></div>
+                            <div class="text-right"><span class="text-2xl font-bold text-primary">$299</span><span class="text-sm text-gray-500">/persona</span></div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-500">3 días • 2 noches</span>
+                            <button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg">Reservar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                    <div class="relative"><img src="img/Lima_historica.png" alt="Lima" class="w-full h-64 object-cover"></div>
+                    <div class="p-6">
+                        <h3 class="font-display text-2xl font-bold text-primary mb-2">Lima Histórica</h3>
+                        <p class="text-gray-600 mb-4">Descubre la capital colonial con su arquitectura virreinal y gastronomía mundial.</p>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center"><span class="star-rating text-lg">★★★★☆</span><span class="ml-2 text-sm text-gray-600">(4.7/5)</span></div>
+                            <div class="text-right"><span class="text-2xl font-bold text-primary">$149</span><span class="text-sm text-gray-500">/persona</span></div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-500">2 días • 1 noche</span>
+                            <button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg">Reservar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                    <div class="relative"><img src="img/Cusco_Imperial.jpg" alt="Cusco" class="w-full h-64 object-cover"></div>
+                    <div class="p-6">
+                        <h3 class="font-display text-2xl font-bold text-primary mb-2">Cusco Imperial</h3>
+                        <p class="text-gray-600 mb-4">La antigua capital del Imperio Incaico te espera con su magia ancestral.</p>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center"><span class="star-rating text-lg">★★★★★</span><span class="ml-2 text-sm text-gray-600">(4.8/5)</span></div>
+                            <div class="text-right"><span class="text-2xl font-bold text-primary">$179</span><span class="text-sm text-gray-500">/persona</span></div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-500">4 días • 3 noches</span>
+                            <button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg">Reservar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                    <div class="relative"><img src="img/Arequpa_Blanca_.jpg" alt="Arequipa" class="w-full h-64 object-cover"></div>
+                    <div class="p-6">
+                        <h3 class="font-display text-2xl font-bold text-primary mb-2">Arequipa Blanca</h3>
+                        <p class="text-gray-600 mb-4">La ciudad de sillar con sus imponentes volcanes y arquitectura colonial.</p>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center"><span class="star-rating text-lg">★★★★☆</span><span class="ml-2 text-sm text-gray-600">(4.6/5)</span></div>
+                            <div class="text-right"><span class="text-2xl font-bold text-primary">$199</span><span class="text-sm text-gray-500">/persona</span></div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-500">3 días • 2 noches</span>
+                            <button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg">Reservar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                    <div class="relative"><img src="img/Amazonas_Iquito.jpg" alt="Iquitos" class="w-full h-64 object-cover"></div>
+                    <div class="p-6">
+                        <h3 class="font-display text-2xl font-bold text-primary mb-2">Amazonas Iquitos</h3>
+                        <p class="text-gray-600 mb-4">Aventúrate en la selva amazónica con su biodiversidad única.</p>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center"><span class="star-rating text-lg">★★★★★</span><span class="ml-2 text-sm text-gray-600">(4.9/5)</span></div>
+                            <div class="text-right"><span class="text-2xl font-bold text-primary">$399</span><span class="text-sm text-gray-500">/persona</span></div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-500">4 días • 3 noches</span>
+                            <button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg">Reservar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                    <div class="relative"><img src="img/Lineas_De_Nazca.jpg" alt="Nazca" class="w-full h-64 object-cover"></div>
+                    <div class="p-6">
+                        <h3 class="font-display text-2xl font-bold text-primary mb-2">Líneas de Nazca</h3>
+                        <p class="text-gray-600 mb-4">Contempla los misteriosos geoglifos desde el aire.</p>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center"><span class="star-rating text-lg">★★★★☆</span><span class="ml-2 text-sm text-gray-600">(4.5/5)</span></div>
+                            <div class="text-right"><span class="text-2xl font-bold text-primary">$249</span><span class="text-sm text-gray-500">/persona</span></div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-500">2 días • 1 noche</span>
+                            <button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg">Reservar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-3xl md:text-5xl font-bold text-primary mb-4">Sistema de Recompensas</h2>
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+                    Acumula puntos con cada viaje y accede a beneficios exclusivos
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl shadow-lg p-8 text-center card-hover">
+                    <div class="w-20 h-20 bg-gray-400 rounded-full mx-auto mb-6 flex items-center justify-center">
+                        <span class="text-white text-2xl font-bold">Ag</span>
+                    </div>
+                    <h3 class="font-display text-2xl font-bold text-gray-600 mb-4">Nivel Plata</h3>
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold text-gray-600">5%</span>
+                        <p class="text-gray-600">Descuento en todos los viajes</p>
+                    </div>
+                    <ul class="text-left space-y-2 mb-6">
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span><span>0-999 puntos</span></li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span><span>Check-in preferente</span></li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span><span>Boletín exclusivo</span></li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg p-8 text-center card-hover border-4 border-yellow-400">
+                    <div class="w-20 h-20 bg-yellow-400 rounded-full mx-auto mb-6 flex items-center justify-center">
+                        <span class="text-white text-2xl font-bold">Au</span>
+                    </div>
+                    <h3 class="font-display text-2xl font-bold text-yellow-600 mb-4">Nivel Oro</h3>
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold text-yellow-600">10%</span>
+                        <p class="text-gray-600">Descuento en todos los viajes</p>
+                    </div>
+                    <ul class="text-left space-y-2 mb-6">
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span><span>1000-4999 puntos</span></li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span><span>Upgrades gratuitos</span></li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span><span>Soporte prioritario</span></li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span><span>Eventos exclusivos</span></li>
+                    </ul>
+                    <div class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-semibold">Recomendado</div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg p-8 text-center card-hover">
+                    <div class="w-20 h-20 bg-blue-400 rounded-full mx-auto mb-6 flex items-center justify-center">
+                        <span class="text-white text-2xl font-bold">D</span>
+                    </div>
+                    <h3 class="font-display text-2xl font-bold text-blue-600 mb-4">Nivel Diamante</h3>
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold text-blue-600">15%</span>
+                        <p class="text-gray-600">Descuento en todos los viajes</p>
+                    </div>
+                    <ul class="text-left space-y-2 mb-6">
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span><span>5000+ puntos</span></li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span><span>Viajes gratis</span></li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span><span>Asistente personal</span></li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span><span>Acceso VIP</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <div class="bg-white rounded-lg p-6 max-w-2xl mx-auto shadow-lg">
+                    <h3 class="font-display text-2xl font-bold text-primary mb-4">¿Cómo funcionan los puntos?</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="text-center"><div class="text-3xl font-bold text-primary mb-2">10x</div><p class="text-sm text-gray-600">Puntos por cada $1 gastado</p></div>
+                        <div class="text-center"><div class="text-3xl font-bold text-primary mb-2">1000</div><p class="text-sm text-gray-600">Puntos = $10 descuento</p></div>
+                        <div class="text-center"><div class="text-3xl font-bold text-primary mb-2">500</div><p class="text-sm text-gray-600">Puntos de regalo al registrarse</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-3xl md:text-5xl font-bold text-primary mb-4">Lo que dicen nuestros viajeros</h2>
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+                    Miles de aventureros han descubierto el Perú con nosotros
+                </p>
+            </div>
+
+            <div class="splide" id="testimonials-slider">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        <li class="splide__slide"><div class="bg-gray-50 rounded-xl p-8 mx-4"><div class="flex items-center mb-4"><img src="img/Maria_Gonzales.png" alt="María" class="w-16 h-16 rounded-full mr-4"><div><h4 class="font-semibold text-lg">María González</h4><div class="flex items-center"><span class="star-rating">★★★★★</span><span class="ml-2 text-sm text-gray-600">Nivel Oro</span></div></div></div><p class="text-gray-700 italic">"Increíble experiencia en Machu Picchu. Todo estuvo perfectamente organizado, los guías fueron muy profesionales y conocedores. ¡Ya estoy planeando mi próximo viaje con LEAC!"</p><div class="mt-4 text-sm text-gray-500">Viaje a Machu Picchu - Noviembre 2025</div></div></li>
+                        <li class="splide__slide"><div class="bg-gray-50 rounded-xl p-8 mx-4"><div class="flex items-center mb-4"><img src="img/Juan_parra.jpeg" alt="Juan" class="w-16 h-16 rounded-full mr-4"><div><h4 class="font-semibold text-lg">Juan Parra</h4><div class="flex items-center"><span class="star-rating">★★★★★</span><span class="ml-2 text-sm text-gray-600">Nivel Diamante</span></div></div></div><p class="text-gray-700 italic">"5 estrellas! Ya es mi tercer viaje con LEAC y siempre superan mis expectativas. El sistema de puntos me ha permitido obtener descuentos increíbles y hasta un viaje gratis."</p><div class="mt-4 text-sm text-gray-500">Viaje a la Amazonía - Diciembre 2025</div></div></li>
+                        <li class="splide__slide"><div class="bg-gray-50 rounded-xl p-8 mx-4"><div class="flex items-center mb-4"><img src="img/Ana_Lopez.png" alt="Ana" class="w-16 h-16 rounded-full mr-4"><div><h4 class="font-semibold text-lg">Ana López</h4><div class="flex items-center"><span class="star-rating">★★★★★</span><span class="ml-2 text-sm text-gray-600">Nivel Plata</span></div></div></div><p class="text-gray-700 italic">"Muy buen servicio desde el principio. La atención al cliente es excelente y todos los detalles del viaje estuvieron perfectos. ¡Ganas de repetir la experiencia!"</p><div class="mt-4 text-sm text-gray-500">Viaje a Arequipa - Noviembre 2025</div></div></li>
+                        <li class="splide__slide"><div class="bg-gray-50 rounded-xl p-8 mx-4"><div class="flex items-center mb-4"><img src="img/Christian_Bale.png" alt="Christian" class="w-16 h-16 rounded-full mr-4"><div><h4 class="font-semibold text-lg">Christian Bale</h4><div class="flex items-center"><span class="star-rating">★★★★★</span><span class="ml-2 text-sm text-gray-600">Nivel Diamante</span></div></div></div><p class="text-gray-700 italic">"Increíble atención en cada detalle. La ruta por el Valle Sagrado fue magistral y los hoteles seleccionados de primera. ¡LEAC sabe cómo sorprender!"</p><div class="mt-4 text-sm text-gray-500">Valle Sagrado - Noviembre 2025</div></div></li>
+                        <li class="splide__slide"><div class="bg-gray-50 rounded-xl p-8 mx-4"><div class="flex items-center mb-4"><img src="img/Lucia_Fernandez.png" alt="Lucía" class="w-16 h-16 rounded-full mr-4"><div><h4 class="font-semibold text-lg">Lucía Fernández</h4><div class="flex items-center"><span class="star-rating">★★★★★</span><span class="ml-2 text-sm text-gray-600">Nivel Diamante</span></div></div></div><p class="text-gray-700 italic">"He viajado por todo el Perú con LEAC. Su sistema de puntos me ha dado acceso a experiencias únicas, como un tour privado en Machu Picchu."</p><div class="mt-4 text-sm text-gray-500">Machu Picchu Privado - Diciembre 2025</div></div></li>
+                        <li class="splide__slide"><div class="bg-gray-50 rounded-xl p-8 mx-4"><div class="flex items-center mb-4"><img src="img/Daniela_Rivas.png" alt="Daniela" class="w-16 h-16 rounded-full mr-4"><div><h4 class="font-semibold text-lg">Daniela Rivas</h4><div class="flex items-center"><span class="star-rating">★★★★★</span><span class="ml-2 text-sm text-gray-600">Nivel Plata</span></div></div></div><p class="text-gray-700 italic">"Mi viaje a la Amazonía superó todos mis sueños. La fauna, la gastronomía y la atención de LEAC hicieron todo inolvidable."</p><div class="mt-4 text-sm text-gray-500">Amazonía Iquitos - Enero 2026</div></div></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <div id="loginModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center">
+
+        <div class="relative bg-gradient-to-br from-yellow-50 via-white to-yellow-100 rounded-2xl shadow-2xl border border-yellow-300 max-w-md w-full mx-4 overflow-hidden">
+
+            <div class="h-2 bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-400"></div>
+
+                <div class="p-8">
+
+                    <div class="text-center mb-6">
+                        <div class="inline-block p-4 bg-yellow-400/20 rounded-full mb-3">
+                            <span class="text-4xl">🧭</span>
+                        </div>
+                        <h3 class="font-display text-3xl font-bold bg-gradient-to-r from-yellow-600 to-amber-700 bg-clip-text text-transparent">
+                            Acceso LEAC
+                        </h3>
+                        <p class="text-gray-600 mt-1">Tu próxima aventura te espera</p>
+                    </div>
+
+                    <div class="space-y-3">
+                        <button id="googleLogin" class="w-full flex items-center justify-center gap-3 bg-white border border-gray-300 text-gray-800 py-3 rounded-xl hover:bg-gray-50 transition-all shadow-sm">
+                            <img src="https://img.icons8.com/color/24/google-logo.png" alt="Google"/>
+                            <span class="font-medium">Continuar con Google</span>
+                        </button>
+
+                        <button class="w-full flex items-center justify-center gap-3 bg-black text-white py-3 rounded-xl hover:bg-gray-800 transition-all">
+                            <img src="https://img.icons8.com/ios-filled/24/mac-os.png" alt="Apple"/>
+                            <span class="font-medium">Continuar con Apple</span>
+                        </button>
+                    </div>
+
+                    <div class="flex items-center my-6">
+                        <div class="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
+                        <span class="px-3 text-xs text-gray-500 uppercase tracking-widest">o</span>
+                        <div class="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
+                    </div>
+
+                    <form id="loginForm" class="space-y-4">
+                           <div class="relative">
+                                <input type="email" id="email" placeholder="Correo electrónico" required
+                                    class="peer w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 placeholder-transparent">
+                                <label for="email" class="absolute left-4 -top-2.5 text-xs text-gray-500 bg-yellow-50 px-1 transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-focus:-top-2.5 peer-focus:text-xs">
+                                    Correo electrónico
+                                </label>
+                            </div>
+
+                            <div class="relative">
+                                <input type="password" id="password" placeholder="Contraseña" required
+                                    class="peer w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 placeholder-transparent">
+                                <label for="password" class="absolute left-4 -top-2.5 text-xs text-gray-500 bg-yellow-50 px-1 transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-focus:-top-2.5 peer-focus:text-xs">
+                                    Contraseña
+                                </label>
+                            </div>
+
+                            <button type="submit" class="w-full bg-gradient-to-r from-yellow-500 to-amber-600 text-white py-3 rounded-xl hover:from-yellow-600 hover:to-amber-700 transition-all font-semibold shadow-lg hover:shadow-yellow-500/30">
+                                Ingresar
+                            </button>
+                        </form>
+
+                        <div class="mt-6 text-center space-y-2">
+                            <a href="#" class="text-sm text-gray-500 hover:text-primary">¿Olvidaste tu contraseña?</a>
+                                <p class="text-sm text-gray-600">
+                                    ¿Primera vez en LEAC?
+                                    <a href="#" class="text-primary font-semibold hover:underline">Crea tu cuenta</a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <button id="closeModal" class="absolute top-4 right-4 w-9 h-9 grid place-items-center text-gray-400 hover:text-gray-800 hover:bg-gray-200 rounded-full transition-colors">
+                            ✕
+                        </button>
+                    </div>
+                </div>
+
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="font-display text-2xl font-bold text-secondary mb-4">LEAC</h3>
+                    <p class="text-gray-300 mb-4">
+                        Explorando los tesoros del Perú con pasión y profesionalismo desde 2025.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-secondary">📘</a>
+                        <a href="#" class="text-gray-300 hover:text-secondary">📷</a>
+                        <a href="#" class="text-gray-300 hover:text-secondary">🐦</a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Destinos</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="destinos.html" class="hover:text-secondary transition-colors">Machu Picchu</a></li>
+                        <li><a href="destinos.html" class="hover:text-secondary transition-colors">Lima</a></li>
+                        <li><a href="destinos.html" class="hover:text-secondary transition-colors">Cusco</a></li>
+                        <li><a href="destinos.html" class="hover:text-secondary transition-colors">Arequipa</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Servicios</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="hoteles.html" class="hover:text-secondary transition-colors">Hoteles</a></li>
+                        <li><a href="perfil.html" class="hover:text-secondary transition-colors">Mi Perfil</a></li>
+                        <li><a href="perfil.html" class="hover:text-secondary transition-colors">Sistema de Puntos</a></li>
+                        <li><a href="contacto.html" class="hover:text-secondary transition-colors">Soporte</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Contacto</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li>📞 +51 992 186 669</li>
+                        <li>📧 info@leac-peru.com</li>
+                        <li>📍 Trujillo, Perú</li>
+                        <li>🕒 24/7 Soporte</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-300">
+                <p>&copy; 2025 LEAC Explora los Tesoros del Perú. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="Js/main.js"></script>
+</body>
+</html>

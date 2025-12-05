@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destinos - LEAC Explora los Tesoros del Perú</title>
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <link rel="stylesheet" href="Styles/destinos.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+</head>
+<body class="bg-gray-50">
+    
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="index.html" class="flex items-center group cursor-pointer">
+                    <h1 class="font-display text-2xl font-bold text-primary group-hover:text-opacity-80 transition-colors">LEAC</h1>
+                    <span class="ml-2 text-sm text-gray-600">Explora Perú</span>
+                </a>
+
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-primary transition-colors">Inicio</a>
+                    <a href="destinos.html" class="text-primary font-semibold">Destinos</a>
+                    <a href="hoteles.html" class="text-gray-700 hover:text-primary transition-colors">Hoteles</a>
+                    <a href="perfil.html" class="text-gray-700 hover:text-primary transition-colors">Mi Perfil</a>
+                    <a href="contacto.html" class="text-gray-700 hover:text-primary transition-colors">Contáctanos</a>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <button id="loginBtn" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-colors text-sm md:text-base">
+                        Iniciar Sesión
+                    </button>
+                    
+                    <div id="userProfile" class="hidden flex items-center space-x-2">
+                        <img id="userAvatar" src="" alt="Avatar" class="w-8 h-8 rounded-full border border-gray-200">
+                        <div class="flex flex-col items-start leading-tight">
+                            <span id="userName" class="text-sm font-medium hidden md:block"></span>
+                            <span id="userLevel" class="px-2 py-0.5 text-[10px] rounded-full bg-secondary text-white font-bold tracking-wider uppercase"></span>
+                        </div>
+                        <button id="logoutBtn" class="ml-2 text-xs text-red-500 hover:text-red-700 font-medium hover:bg-red-50 px-2 py-1 rounded transition-colors" title="Cerrar Sesión">
+                            Salir ➜
+                        </button>
+                    </div>
+
+                    <button id="mobileMenuBtn" class="md:hidden text-gray-600 hover:text-primary focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full left-0 shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html" class="block px-3 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md">Inicio</a>
+                <a href="destinos.html" class="block px-3 py-2 text-primary font-semibold rounded-md bg-gray-50">Destinos</a>
+                <a href="hoteles.html" class="block px-3 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md">Hoteles</a>
+                <a href="perfil.html" class="block px-3 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md">Mi Perfil</a>
+                <a href="contacto.html" class="block px-3 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md">Contáctanos</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="pt-24 pb-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="font-display text-5xl md:text-6xl font-bold text-primary mb-4">
+                    Todos los Destinos
+                </h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Explora cada rincón del Perú, desde las alturas de los Andes hasta la profundidad de la Amazonía
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-8 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-wrap justify-center gap-4">
+                <button class="filter-btn px-6 py-3 rounded-full font-semibold bg-primary text-white transition-colors" data-filter="all">
+                    Todos
+                </button>
+                <button class="filter-btn px-6 py-3 rounded-full font-semibold bg-white text-gray-700 hover:bg-primary hover:text-white transition-colors" data-filter="arqueologico">
+                    Arqueológico
+                </button>
+                <button class="filter-btn px-6 py-3 rounded-full font-semibold bg-white text-gray-700 hover:bg-primary hover:text-white transition-colors" data-filter="naturaleza">
+                    Naturaleza
+                </button>
+                <button class="filter-btn px-6 py-3 rounded-full font-semibold bg-white text-gray-700 hover:bg-primary hover:text-white transition-colors" data-filter="aventura">
+                    Aventura
+                </button>
+                <button class="filter-btn px-6 py-3 rounded-full font-semibold bg-white text-gray-700 hover:bg-primary hover:text-white transition-colors" data-filter="cultural">
+                    Cultural
+                </button>
+                <button class="filter-btn px-6 py-3 rounded-full font-semibold bg-white text-gray-700 hover:bg-primary hover:text-white transition-colors" data-filter="gastronomia">
+                    Gastronomía
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="destinationsGrid">
+                
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover" data-category="arqueologico aventura">
+                    <div class="relative">
+                        <img src="img/Macchu_Picchuu.jpg" alt="Machu Picchu" class="w-full h-64 object-cover">
+                        <div class="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-sm font-semibold">Popular</div>
+                        <div class="absolute bottom-4 left-4">
+                            <div class="flex items-center">
+                                <span class="star-rating text-white text-lg">★★★★★</span>
+                                <span class="ml-2 text-white text-sm">4.9 (2,450)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-2xl font-bold text-primary mb-2">Machu Picchu</h3>
+                        <p class="text-gray-600 mb-4">La maravilla del mundo moderno te espera con sus misteriosas ruinas incaicas y paisajes espectaculares.</p>
+                        <div class="mb-4">
+                            <div class="flex items-center text-sm text-gray-500 mb-2">
+                                <span class="mr-4">⏱️ 3 días • 2 noches</span>
+                                <span class="mr-4">👥 Máx 15 personas</span>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Arqueológico</span>
+                                <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Aventura</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <span class="text-3xl font-bold text-primary">$299</span>
+                                <span class="text-sm text-gray-500">/persona</span>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-sm text-gray-500 line-through">$399</div>
+                                <div class="text-sm text-green-600 font-semibold">25% OFF</div>
+                            </div>
+                        </div>
+                        <button class="w-full bg-primary text-white py-3 rounded-lg hover:bg-opacity-90 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg font-semibold">Reservar Ahora</button>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover" data-category="cultural gastronomia">
+                    <div class="relative">
+                        <img src="img/Lima_historica.png" alt="Lima" class="w-full h-64 object-cover">
+                        <div class="absolute bottom-4 left-4">
+                            <div class="flex items-center">
+                                <span class="star-rating text-white text-lg">★★★★☆</span>
+                                <span class="ml-2 text-white text-sm">4.7 (1,820)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-2xl font-bold text-primary mb-2">Lima Histórica</h3>
+                        <p class="text-gray-600 mb-4">Descubre la capital colonial con su arquitectura virreinal y gastronomía mundialmente reconocida.</p>
+                        <div class="mb-4">
+                            <div class="flex items-center text-sm text-gray-500 mb-2">
+                                <span class="mr-4">⏱️ 2 días • 1 noche</span>
+                                <span class="mr-4">👥 Máx 20 personas</span>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">Cultural</span>
+                                <span class="px-2 py-1 bg-orange-100 text-orange-800 text-xs rounded-full">Gastronomía</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <span class="text-3xl font-bold text-primary">$149</span>
+                                <span class="text-sm text-gray-500">/persona</span>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-sm text-gray-500 line-through">$199</div>
+                                <div class="text-sm text-green-600 font-semibold">25% OFF</div>
+                            </div>
+                        </div>
+                        <button class="w-full bg-primary text-white py-3 rounded-lg hover:bg-opacity-90 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg font-semibold">Reservar Ahora</button>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover" data-category="cultural arqueologico">
+                    <div class="relative">
+                        <img src="img/Cusco_Imperial.jpg" alt="Cusco" class="w-full h-64 object-cover">
+                        <div class="absolute bottom-4 left-4">
+                            <div class="flex items-center">
+                                <span class="star-rating text-white text-lg">★★★★★</span>
+                                <span class="ml-2 text-white text-sm">4.8 (3,120)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-2xl font-bold text-primary mb-2">Cusco Imperial</h3>
+                        <p class="text-gray-600 mb-4">La antigua capital del Imperio Incaico te espera con su magia ancestral y cultura viva.</p>
+                        <div class="mb-4">
+                            <div class="flex items-center text-sm text-gray-500 mb-2">
+                                <span class="mr-4">⏱️ 4 días • 3 noches</span>
+                                <span class="mr-4">👥 Máx 12 personas</span>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">Cultural</span>
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Arqueológico</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <span class="text-3xl font-bold text-primary">$179</span>
+                                <span class="text-sm text-gray-500">/persona</span>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-sm text-gray-500 line-through">$229</div>
+                                <div class="text-sm text-green-600 font-semibold">22% OFF</div>
+                            </div>
+                        </div>
+                        <button class="w-full bg-primary text-white py-3 rounded-lg hover:bg-opacity-90 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg font-semibold">Reservar Ahora</button>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover" data-category="cultural naturaleza">
+                    <div class="relative">
+                        <img src="img/Arequpa_Blanca_.jpg" alt="Arequipa" class="w-full h-64 object-cover">
+                        <div class="absolute bottom-4 left-4">
+                            <div class="flex items-center">
+                                <span class="star-rating text-white text-lg">★★★★☆</span>
+                                <span class="ml-2 text-white text-sm">4.6 (1,650)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-2xl font-bold text-primary mb-2">Arequipa Blanca</h3>
+                        <p class="text-gray-600 mb-4">La ciudad de sillar con sus imponentes volcanes y arquitectura colonial única.</p>
+                        <div class="mb-4">
+                            <div class="flex items-center text-sm text-gray-500 mb-2">
+                                <span class="mr-4">⏱️ 3 días • 2 noches</span>
+                                <span class="mr-4">👥 Máx 16 personas</span>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">Cultural</span>
+                                <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Naturaleza</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <span class="text-3xl font-bold text-primary">$199</span>
+                                <span class="text-sm text-gray-500">/persona</span>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-sm text-gray-500 line-through">$259</div>
+                                <div class="text-sm text-green-600 font-semibold">23% OFF</div>
+                            </div>
+                        </div>
+                        <button class="w-full bg-primary text-white py-3 rounded-lg hover:bg-opacity-90 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg font-semibold">Reservar Ahora</button>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover" data-category="naturaleza aventura">
+                    <div class="relative">
+                        <img src="img/Amazonas_Iquito.jpg" alt="Iquitos" class="w-full h-64 object-cover">
+                        <div class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">Aventura</div>
+                        <div class="absolute bottom-4 left-4">
+                            <div class="flex items-center">
+                                <span class="star-rating text-white text-lg">★★★★★</span>
+                                <span class="ml-2 text-white text-sm">4.9 (980)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-2xl font-bold text-primary mb-2">Amazonas Iquitos</h3>
+                        <p class="text-gray-600 mb-4">Aventúrate en la selva amazónica con su biodiversidad única y experiencias inolvidables.</p>
+                        <div class="mb-4">
+                            <div class="flex items-center text-sm text-gray-500 mb-2">
+                                <span class="mr-4">⏱️ 4 días • 3 noches</span>
+                                <span class="mr-4">👥 Máx 10 personas</span>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Naturaleza</span>
+                                <span class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full">Aventura</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <span class="text-3xl font-bold text-primary">$399</span>
+                                <span class="text-sm text-gray-500">/persona</span>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-sm text-gray-500 line-through">$499</div>
+                                <div class="text-sm text-green-600 font-semibold">20% OFF</div>
+                            </div>
+                        </div>
+                        <button class="w-full bg-primary text-white py-3 rounded-lg hover:bg-opacity-90 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg font-semibold">Reservar Ahora</button>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover" data-category="arqueologico aventura">
+                    <div class="relative">
+                        <img src="img/Lineas_De_Nazca.jpg" alt="Nazca" class="w-full h-64 object-cover">
+                        <div class="absolute bottom-4 left-4">
+                            <div class="flex items-center">
+                                <span class="star-rating text-white text-lg">★★★★☆</span>
+                                <span class="ml-2 text-white text-sm">4.5 (750)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-2xl font-bold text-primary mb-2">Líneas de Nazca</h3>
+                        <p class="text-gray-600 mb-4">Contempla los misteriosos geoglifos desde el aire y descubre su enigma milenario.</p>
+                        <div class="mb-4">
+                            <div class="flex items-center text-sm text-gray-500 mb-2">
+                                <span class="mr-4">⏱️ 2 días • 1 noche</span>
+                                <span class="mr-4">👥 Máx 12 personas</span>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Arqueológico</span>
+                                <span class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full">Aventura</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <span class="text-3xl font-bold text-primary">$249</span>
+                                <span class="text-sm text-gray-500">/persona</span>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-sm text-gray-500 line-through">$319</div>
+                                <div class="text-sm text-green-600 font-semibold">22% OFF</div>
+                            </div>
+                        </div>
+                        <button class="w-full bg-primary text-white py-3 rounded-lg hover:bg-opacity-90 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg font-semibold">Reservar Ahora</button>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover" data-category="cultural naturaleza">
+                    <div class="relative">
+                        <img src="img/Lago_Titi_Caca.jpg" alt="Puno" class="w-full h-64 object-cover">
+                        <div class="absolute bottom-4 left-4">
+                            <div class="flex items-center">
+                                <span class="star-rating text-white text-lg">★★★★☆</span>
+                                <span class="ml-2 text-white text-sm">4.6 (1,340)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-2xl font-bold text-primary mb-2">Lago Titicaca</h3>
+                        <p class="text-gray-600 mb-4">Navega por las aguas sagradas de los incas y visita las islas flotantes de los Uros.</p>
+                        <div class="mb-4">
+                            <div class="flex items-center text-sm text-gray-500 mb-2">
+                                <span class="mr-4">⏱️ 3 días • 2 noches</span>
+                                <span class="mr-4">👥 Máx 14 personas</span>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">Cultural</span>
+                                <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Naturaleza</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <span class="text-3xl font-bold text-primary">$229</span>
+                                <span class="text-sm text-gray-500">/persona</span>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-sm text-gray-500 line-through">$289</div>
+                                <div class="text-sm text-green-600 font-semibold">21% OFF</div>
+                            </div>
+                        </div>
+                        <button class="w-full bg-primary text-white py-3 rounded-lg hover:bg-opacity-90 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg font-semibold">Reservar Ahora</button>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover" data-category="naturaleza aventura">
+                    <div class="relative">
+                        <img src="img/Reserva_Paracas.jpg" alt="Paracas" class="w-full h-64 object-cover">
+                        <div class="absolute bottom-4 left-4">
+                            <div class="flex items-center">
+                                <span class="star-rating text-white text-lg">★★★★☆</span>
+                                <span class="ml-2 text-white text-sm">4.4 (890)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-2xl font-bold text-primary mb-2">Paracas y la Reserva</h3>
+                        <p class="text-gray-600 mb-4">Descubre la belleza natural de la reserva de Paracas y las misteriosas líneas de Nazca.</p>
+                        <div class="mb-4">
+                            <div class="flex items-center text-sm text-gray-500 mb-2">
+                                <span class="mr-4">⏱️ 2 días • 1 noche</span>
+                                <span class="mr-4">👥 Máx 18 personas</span>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Naturaleza</span>
+                                <span class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full">Aventura</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <span class="text-3xl font-bold text-primary">$159</span>
+                                <span class="text-sm text-gray-500">/persona</span>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-sm text-gray-500 line-through">$209</div>
+                                <div class="text-sm text-green-600 font-semibold">24% OFF</div>
+                            </div>
+                        </div>
+                        <button class="w-full bg-primary text-white py-3 rounded-lg hover:bg-opacity-90 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg font-semibold">Reservar Ahora</button>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover" data-category="arqueologico cultural">
+                    <div class="relative">
+                        <img src="img/Chan_Chan_Trujillo.jpg" alt="Trujillo" class="w-full h-64 object-cover">
+                        <div class="absolute bottom-4 left-4">
+                            <div class="flex items-center">
+                                <span class="star-rating text-white text-lg">★★★★☆</span>
+                                <span class="ml-2 text-white text-sm">4.5 (670)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-2xl font-bold text-primary mb-2">Chan Chan Trujillo</h3>
+                        <p class="text-gray-600 mb-4">Explora la ciudadela chimú más grande de América y descubre la historia precolombina.</p>
+                        <div class="mb-4">
+                            <div class="flex items-center text-sm text-gray-500 mb-2">
+                                <span class="mr-4">⏱️ 2 días • 1 noche</span>
+                                <span class="mr-4">👥 Máx 15 personas</span>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Arqueológico</span>
+                                <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">Cultural</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <span class="text-3xl font-bold text-primary">$189</span>
+                                <span class="text-sm text-gray-500">/persona</span>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-sm text-gray-500 line-through">$239</div>
+                                <div class="text-sm text-green-600 font-semibold">21% OFF</div>
+                            </div>
+                        </div>
+                        <button class="w-full bg-primary text-white py-3 rounded-lg hover:bg-opacity-90 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg font-semibold">Reservar Ahora</button>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover" data-category="naturaleza aventura">
+                    <div class="relative">
+                        <img src="img/Colca_Cañon.jpg" alt="Colca Canyon" class="w-full h-64 object-cover">
+                        <div class="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">Aventura</div>
+                        <div class="absolute bottom-4 left-4">
+                            <div class="flex items-center">
+                                <span class="star-rating text-white text-lg">★★★★★</span>
+                                <span class="ml-2 text-white text-sm">4.8 (1,200)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-2xl font-bold text-primary mb-2">Cañón del Colca</h3>
+                        <p class="text-gray-600 mb-4">Uno de los cañones más profundos del mundo, hogar del cóndor andino y paisajes impresionantes.</p>
+                        <div class="mb-4">
+                            <div class="flex items-center text-sm text-gray-500 mb-2">
+                                <span class="mr-4">⏱️ 2 días • 1 noche</span>
+                                <span class="mr-4">👥 Máx 12 personas</span>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Naturaleza</span>
+                                <span class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full">Aventura</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <span class="text-3xl font-bold text-primary">$219</span>
+                                <span class="text-sm text-gray-500">/persona</span>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-sm text-gray-500 line-through">$279</div>
+                                <div class="text-sm text-green-600 font-semibold">21% OFF</div>
+                            </div>
+                        </div>
+                        <button class="w-full bg-primary text-white py-3 rounded-lg hover:bg-opacity-90 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg font-semibold">Reservar Ahora</button>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover" data-category="naturaleza aventura">
+                    <div class="relative">
+                        <img src="img/Cordillera_Blanca.jpg" alt="Huaraz" class="w-full h-64 object-cover">
+                        <div class="absolute bottom-4 left-4">
+                            <div class="flex items-center">
+                                <span class="star-rating text-white text-lg">★★★★★</span>
+                                <span class="ml-2 text-white text-sm">4.7 (1,120)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-2xl font-bold text-primary mb-2">Cordillera Blanca</h3>
+                        <p class="text-gray-600 mb-4">Aventura en los Andes con trekking, lagunas turquesas y paisajes montañosos espectaculares.</p>
+                        <div class="mb-4">
+                            <div class="flex items-center text-sm text-gray-500 mb-2">
+                                <span class="mr-4">⏱️ 3 días • 2 noches</span>
+                                <span class="mr-4">👥 Máx 12 personas</span>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Naturaleza</span>
+                                <span class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full">Aventura</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <span class="text-3xl font-bold text-primary">$269</span>
+                                <span class="text-sm text-gray-500">/persona</span>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-sm text-gray-500 line-through">$339</div>
+                                <div class="text-sm text-green-600 font-semibold">21% OFF</div>
+                            </div>
+                        </div>
+                        <button class="w-full bg-primary text-white py-3 rounded-lg hover:bg-opacity-90 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg font-semibold">Reservar Ahora</button>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover" data-category="playa relax">
+                    <div class="relative">
+                        <img src="img/Mancora_Beach.jpg" alt="Máncora" class="w-full h-64 object-cover">
+                        <div class="absolute top-4 right-4 bg-blue-400 text-white px-3 py-1 rounded-full text-sm font-semibold">Relax</div>
+                        <div class="absolute bottom-4 left-4">
+                            <div class="flex items-center">
+                                <span class="star-rating text-white text-lg">★★★★☆</span>
+                                <span class="ml-2 text-white text-sm">4.6 (950)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-2xl font-bold text-primary mb-2">Máncora Beach</h3>
+                        <p class="text-gray-600 mb-4">Sol, mar y surf en el norte del Perú. Ideal para descansar y disfrutar del océano Pacífico.</p>
+                        <div class="mb-4">
+                            <div class="flex items-center text-sm text-gray-500 mb-2">
+                                <span class="mr-4">⏱️ 3 días • 2 noches</span>
+                                <span class="mr-4">👥 Máx 20 personas</span>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Playa</span>
+                                <span class="px-2 py-1 bg-teal-100 text-teal-800 text-xs rounded-full">Relax</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <span class="text-3xl font-bold text-primary">$189</span>
+                                <span class="text-sm text-gray-500">/persona</span>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-sm text-gray-500 line-through">$239</div>
+                                <div class="text-sm text-green-600 font-semibold">21% OFF</div>
+                            </div>
+                        </div>
+                        <button class="w-full bg-primary text-white py-3 rounded-lg hover:bg-opacity-90 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg font-semibold">Reservar Ahora</button>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover" data-category="aventura naturaleza">
+                    <div class="relative">
+                        <img src="img/Oasis_Huacachina.jpg" alt="Huacachina" class="w-full h-64 object-cover">
+                        <div class="absolute top-4 right-4 bg-yellow-500 text-white px-3 py-1 rounded-full text-sm font-semibold">Oasis</div>
+                        <div class="absolute bottom-4 left-4">
+                            <div class="flex items-center">
+                                <span class="star-rating text-white text-lg">★★★★☆</span>
+                                <span class="ml-2 text-white text-sm">4.5 (1,100)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-2xl font-bold text-primary mb-2">Oasis de Huacachina</h3>
+                        <p class="text-gray-600 mb-4">Vive la emoción del sandboarding y los paseos en tubulares en este mágico oasis natural.</p>
+                        <div class="mb-4">
+                            <div class="flex items-center text-sm text-gray-500 mb-2">
+                                <span class="mr-4">⏱️ 2 días • 1 noche</span>
+                                <span class="mr-4">👥 Máx 16 personas</span>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full">Aventura</span>
+                                <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Naturaleza</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <span class="text-3xl font-bold text-primary">$169</span>
+                                <span class="text-sm text-gray-500">/persona</span>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-sm text-gray-500 line-through">$219</div>
+                                <div class="text-sm text-green-600 font-semibold">23% OFF</div>
+                            </div>
+                        </div>
+                        <button class="w-full bg-primary text-white py-3 rounded-lg hover:bg-opacity-90 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg font-semibold">Reservar Ahora</button>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover" data-category="naturaleza aventura">
+                    <div class="relative">
+                        <img src="img/Montana_7_Colores.jpg" alt="Montaña de 7 Colores" class="w-full h-64 object-cover">
+                        <div class="absolute top-4 right-4 bg-gradient-to-r from-red-500 to-yellow-500 text-white px-3 py-1 rounded-full text-sm font-semibold">Mágico</div>
+                        <div class="absolute bottom-4 left-4">
+                            <div class="flex items-center">
+                                <span class="star-rating text-white text-lg">★★★★★</span>
+                                <span class="ml-2 text-white text-sm">4.9 (1,360)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-2xl font-bold text-primary mb-2">Montaña de 7 Colores</h3>
+                        <p class="text-gray-600 mb-4">Una caminata que te lleva a uno de los paisajes más increíbles del planeta, lleno de colores naturales.</p>
+                        <div class="mb-4">
+                            <div class="flex items-center text-sm text-gray-500 mb-2">
+                                <span class="mr-4">⏱️ 1 día • sin alojamiento</span>
+                                <span class="mr-4">👥 Máx 12 personas</span>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Naturaleza</span>
+                                <span class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full">Aventura</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <span class="text-3xl font-bold text-primary">$169</span>
+                                <span class="text-sm text-gray-500">/persona</span>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-sm text-gray-500 line-through">$219</div>
+                                <div class="text-sm text-green-600 font-semibold">23% OFF</div>
+                            </div>
+                        </div>
+                        <button class="w-full bg-primary text-white py-3 rounded-lg hover:bg-opacity-90 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg font-semibold">Reservar Ahora</button>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover" data-category="naturaleza">
+                    <div class="relative">
+                        <img src="img/Lago_Paron.jpg" alt="Lago Parón" class="w-full h-64 object-cover">
+                        <div class="absolute top-4 right-4 bg-cyan-500 text-white px-3 py-1 rounded-full text-sm font-semibold">Tranquilo</div>
+                        <div class="absolute bottom-4 left-4">
+                            <div class="flex items-center">
+                                <span class="star-rating text-white text-lg">★★★★☆</span>
+                                <span class="ml-2 text-white text-sm">4.6 (720)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-2xl font-bold text-primary mb-2">Lago Parón</h3>
+                        <p class="text-gray-600 mb-4">El lago más grande del Parque Nacional Huascarán, rodeado de picos nevados y aguas turquesas.</p>
+                        <div class="mb-4">
+                            <div class="flex items-center text-sm text-gray-500 mb-2">
+                                <span class="mr-4">⏱️ 1 día • sin alojamiento</span>
+                                <span class="mr-4">👥 Máx 15 personas</span>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Naturaleza</span>
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Montaña</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <span class="text-3xl font-bold text-primary">$149</span>
+                                <span class="text-sm text-gray-500">/persona</span>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-sm text-gray-500 line-through">$189</div>
+                                <div class="text-sm text-green-600 font-semibold">21% OFF</div>
+                            </div>
+                        </div>
+                        <button class="w-full bg-primary text-white py-3 rounded-lg hover:bg-opacity-90 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg font-semibold">Reservar Ahora</button>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover" data-category="naturaleza">
+                    <div class="relative">
+                        <img src="img/Bosque_Piedras_Huayllay.jpg" alt="Bosque de Piedras" class="w-full h-64 object-cover">
+                        <div class="absolute top-4 right-4 bg-gray-700 text-white px-3 py-1 rounded-full text-sm font-semibold">Misterio</div>
+                        <div class="absolute bottom-4 left-4">
+                            <div class="flex items-center">
+                                <span class="star-rating text-white text-lg">★★★★☆</span>
+                                <span class="ml-2 text-white text-sm">4.4 (610)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-2xl font-bold text-primary mb-2">Bosque de Piedras de Huayllay</h3>
+                        <p class="text-gray-600 mb-4">Un santuario natural lleno de formaciones rocosas únicas, ideales para caminatas y fotografía.</p>
+                        <div class="mb-4">
+                            <div class="flex items-center text-sm text-gray-500 mb-2">
+                                <span class="mr-4">⏱️ 2 días • 1 noche</span>
+                                <span class="mr-4">👥 Máx 16 personas</span>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Naturaleza</span>
+                                <span class="px-2 py-1 bg-gray-100 text-gray-800 text-xs rounded-full">Formaciones</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <span class="text-3xl font-bold text-primary">$159</span>
+                                <span class="text-sm text-gray-500">/persona</span>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-sm text-gray-500 line-through">$199</div>
+                                <div class="text-sm text-green-600 font-semibold">20% OFF</div>
+                            </div>
+                        </div>
+                        <button class="w-full bg-primary text-white py-3 rounded-lg hover:bg-opacity-90 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg font-semibold">Reservar Ahora</button>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover" data-category="cultural historia">
+                    <div class="relative">
+                        <img src="img/Tacna_Historica.jpg" alt="Tacna" class="w-full h-64 object-cover">
+                        <div class="absolute bottom-4 left-4">
+                            <div class="flex items-center">
+                                <span class="star-rating text-white text-lg">★★★★☆</span>
+                                <span class="ml-2 text-white text-sm">4.4 (520)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-2xl font-bold text-primary mb-2">Tacna Histórica</h3>
+                        <p class="text-gray-600 mb-4">Conoce la ciudad heroica, su arquitectura republicana y su papel en la historia peruana.</p>
+                        <div class="mb-4">
+                            <div class="flex items-center text-sm text-gray-500 mb-2">
+                                <span class="mr-4">⏱️ 2 días • 1 noche</span>
+                                <span class="mr-4">👥 Máx 18 personas</span>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">Cultural</span>
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Historia</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <span class="text-3xl font-bold text-primary">$139</span>
+                                <span class="text-sm text-gray-500">/persona</span>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-sm text-gray-500 line-through">$179</div>
+                                <div class="text-sm text-green-600 font-semibold">22% OFF</div>
+                            </div>
+                        </div>
+                        <button class="w-full bg-primary text-white py-3 rounded-lg hover:bg-opacity-90 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg font-semibold">Reservar Ahora</button>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover" data-category="arqueologico aventura">
+                    <div class="relative">
+                        <img src="img/kuelap_fortaleza.jpg" alt="Kuelap" class="w-full h-64 object-cover">
+                        <div class="absolute bottom-4 left-4">
+                            <div class="flex items-center">
+                                <span class="star-rating text-white text-lg">★★★★★</span>
+                                <span class="ml-2 text-white text-sm">4.7 (680)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-2xl font-bold text-primary mb-2">Kuelap - La Fortaleza de los Chachapoyas</h3>
+                        <p class="text-gray-600 mb-4">Visita la gran fortaleza preincaica en la nube, rodeada de bosque nuboso y misterio.</p>
+                        <div class="mb-4">
+                            <div class="flex items-center text-sm text-gray-500 mb-2">
+                                <span class="mr-4">⏱️ 3 días • 2 noches</span>
+                                <span class="mr-4">👥 Máx 14 personas</span>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Arqueológico</span>
+                                <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Naturaleza</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <span class="text-3xl font-bold text-primary">$299</span>
+                                <span class="text-sm text-gray-500">/persona</span>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-sm text-gray-500 line-through">$379</div>
+                                <div class="text-sm text-green-600 font-semibold">21% OFF</div>
+                            </div>
+                        </div>
+                        <button class="w-full bg-primary text-white py-3 rounded-lg hover:bg-opacity-90 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg font-semibold">Reservar Ahora</button>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover" data-category="gastronomia">
+                    <div class="relative">
+                        <img src="/Img/Lima_Gourmet.jpeg" alt="Lima Gourmet" class="w-full h-64 object-cover">
+                        <div class="absolute top-4 right-4 bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-semibold">Gastronómico</div>
+                        <div class="absolute bottom-4 left-4">
+                            <div class="flex items-center">
+                                <span class="star-rating text-white text-lg">★★★★★</span>
+                                <span class="ml-2 text-white text-sm">4.9 (1,450)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-2xl font-bold text-primary mb-2">Tour Gastronómico Lima</h3>
+                        <p class="text-gray-600 mb-4">Descubre el sabor de Lima con ceviches, anticuchos y postres tradicionales en los barrios más trendy.</p>
+                        <div class="mb-4">
+                            <div class="flex items-center text-sm text-gray-500 mb-2">
+                                <span class="mr-4">⏱️ 1 día • sin alojamiento</span>
+                                <span class="mr-4">👥 Máx 10 personas</span>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-1 bg-orange-100 text-orange-800 text-xs rounded-full">Gastronomía</span>
+                                <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">Cultural</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <span class="text-3xl font-bold text-primary">$89</span>
+                                <span class="text-sm text-gray-500">/persona</span>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-sm text-gray-500 line-through">$119</div>
+                                <div class="text-sm text-green-600 font-semibold">25% OFF</div>
+                            </div>
+                        </div>
+                        <button class="w-full bg-primary text-white py-3 rounded-lg hover:bg-opacity-90 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg font-semibold">Reservar Ahora</button>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover" data-category="gastronomia">
+                    <div class="relative">
+                        <img src="img/Arequipa_Gastronomica.jpg" alt="Arequipa Gastronómica" class="w-full h-64 object-cover">
+                        <div class="absolute top-4 right-4 bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-semibold">Sabores del Sur</div>
+                        <div class="absolute bottom-4 left-4">
+                            <div class="flex items-center">
+                                <span class="star-rating text-white text-lg">★★★★☆</span>
+                                <span class="ml-2 text-white text-sm">4.7 (980)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-2xl font-bold text-primary mb-2">Arequipa Gastronómica</h3>
+                        <p class="text-gray-600 mb-4">Prueba rocoto relleno, chupe de camarones y queso helado en la ciudad blanca.</p>
+                        <div class="mb-4">
+                            <div class="flex items-center text-sm text-gray-500 mb-2">
+                                <span class="mr-4">⏱️ 2 días • 1 noche</span>
+                                <span class="mr-4">👥 Máx 12 personas</span>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-1 bg-orange-100 text-orange-800 text-xs rounded-full">Gastronomía</span>
+                                <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">Tradicional</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <span class="text-3xl font-bold text-primary">$129</span>
+                                <span class="text-sm text-gray-500">/persona</span>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-sm text-gray-500 line-through">$169</div>
+                                <div class="text-sm text-green-600 font-semibold">24% OFF</div>
+                            </div>
+                        </div>
+                        <button class="w-full bg-primary text-white py-3 rounded-lg hover:bg-opacity-90 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg font-semibold">Reservar Ahora</button>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover" data-category="gastronomia">
+                    <div class="relative">
+                        <img src="img/Cusco_Gastronomia.jpg" alt="Cusco Andino" class="w-full h-64 object-cover">
+                        <div class="absolute top-4 right-4 bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-semibold">Andes Gourmet</div>
+                        <div class="absolute bottom-4 left-4">
+                            <div class="flex items-center">
+                                <span class="star-rating text-white text-lg">★★★★★</span>
+                                <span class="ml-2 text-white text-sm">4.8 (1,100)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-2xl font-bold text-primary mb-2">Cusco Sabores Andinos</h3>
+                        <p class="text-gray-600 mb-4">Degusta cuy chactado, chiri uchu y coca sour mientras disfrutas del Valle Sagrado.</p>
+                        <div class="mb-4">
+                            <div class="flex items-center text-sm text-gray-500 mb-2">
+                                <span class="mr-4">⏱️ 2 días • 1 noche</span>
+                                <span class="mr-4">👥 Máx 14 personas</span>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-1 bg-orange-100 text-orange-800 text-xs rounded-full">Gastronomía</span>
+                                <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Andes</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <span class="text-3xl font-bold text-primary">$149</span>
+                                <span class="text-sm text-gray-500">/persona</span>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-sm text-gray-500 line-through">$189</div>
+                                <div class="text-sm text-green-600 font-semibold">21% OFF</div>
+                            </div>
+                        </div>
+                        <button class="w-full bg-primary text-white py-3 rounded-lg hover:bg-opacity-90 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg font-semibold">Reservar Ahora</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <div id="loginModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center">
+        <div class="relative bg-gradient-to-br from-yellow-50 via-white to-yellow-100 rounded-2xl shadow-2xl border border-yellow-300 max-w-md w-full mx-4 overflow-hidden">
+            <div class="h-2 bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-400"></div>
+                <div class="p-8">
+                    <div class="text-center mb-6">
+                        <div class="inline-block p-4 bg-yellow-400/20 rounded-full mb-3">
+                            <span class="text-4xl">🧭</span>
+                        </div>
+                        <h3 class="font-display text-3xl font-bold bg-gradient-to-r from-yellow-600 to-amber-700 bg-clip-text text-transparent">Acceso LEAC</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <button id="googleLogin" class="w-full flex items-center justify-center gap-3 bg-white border border-gray-300 text-gray-800 py-3 rounded-xl hover:bg-gray-50 transition-all shadow-sm">
+                            <img src="https://img.icons8.com/color/24/google-logo.png" alt="Google"/>
+                            <span class="font-medium">Continuar con Google</span>
+                        </button>
+                    </div>
+                    <div class="flex items-center my-6">
+                        <div class="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
+                        <span class="px-3 text-xs text-gray-500 uppercase tracking-widest">o</span>
+                        <div class="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
+                    </div>
+                    <form id="loginForm" class="space-y-4">
+                           <div class="relative">
+                                <input type="email" id="email" placeholder="Correo electrónico" required class="peer w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 placeholder-transparent">
+                                <label for="email" class="absolute left-4 -top-2.5 text-xs text-gray-500 bg-yellow-50 px-1 transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-focus:-top-2.5 peer-focus:text-xs">Correo electrónico</label>
+                            </div>
+                            <div class="relative">
+                                <input type="password" id="password" placeholder="Contraseña" required class="peer w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 placeholder-transparent">
+                                <label for="password" class="absolute left-4 -top-2.5 text-xs text-gray-500 bg-yellow-50 px-1 transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-focus:-top-2.5 peer-focus:text-xs">Contraseña</label>
+                            </div>
+                            <button type="submit" class="w-full bg-gradient-to-r from-yellow-500 to-amber-600 text-white py-3 rounded-xl hover:from-yellow-600 hover:to-amber-700 transition-all font-semibold shadow-lg hover:shadow-yellow-500/30">Ingresar</button>
+                        </form>
+                        <button id="closeModal" class="absolute top-4 right-4 w-9 h-9 grid place-items-center text-gray-400 hover:text-gray-800 hover:bg-gray-200 rounded-full transition-colors">✕</button>
+                    </div>
+                </div>
+    </div>
+
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="font-display text-2xl font-bold text-secondary mb-4">LEAC</h3>
+                    <p class="text-gray-300 mb-4">
+                        Explorando los tesoros del Perú con pasión y profesionalismo desde 2025.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-secondary">📘</a>
+                        <a href="#" class="text-gray-300 hover:text-secondary">📷</a>
+                        <a href="#" class="text-gray-300 hover:text-secondary">🐦</a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Destinos</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#" class="hover:text-secondary transition-colors">Machu Picchu</a></li>
+                        <li><a href="#" class="hover:text-secondary transition-colors">Lima</a></li>
+                        <li><a href="#" class="hover:text-secondary transition-colors">Cusco</a></li>
+                        <li><a href="#" class="hover:text-secondary transition-colors">Arequipa</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Servicios</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="hoteles.html" class="hover:text-secondary transition-colors">Hoteles</a></li>
+                        <li><a href="perfil.html" class="hover:text-secondary transition-colors">Mi Perfil</a></li>
+                        <li><a href="perfil.html" class="hover:text-secondary transition-colors">Sistema de Puntos</a></li>
+                        <li><a href="contacto.html" class="hover:text-secondary transition-colors">Soporte</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Contacto</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li>📞 +51 992 196 669</li>
+                        <li>📧 info@leac-peru.com</li>
+                        <li>📍 Trujillo, Perú</li>
+                        <li>🕒 24/7 Soporte</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-300">
+                <p>&copy; 2025 LEAC Explora los Tesoros del Perú. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="Js/main.js"></script>
+    <script src="Js/destinos.js"></script>
+</body>
+</html>

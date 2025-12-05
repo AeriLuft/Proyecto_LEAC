@@ -1,0 +1,166 @@
+/* Styles/contacto.css - Versión Final Sincronizada y Responsive */
+
+/* --- 1. Variables de Diseño --- */
+:root {
+    --primary: #C65D00;
+    --secondary: #D4A574;
+    --accent: #2D5A27;
+    --text-dark: #1f2937;
+    --text-medium: #6b7280;
+    --bg-light: #f9fafb;
+}
+
+/* --- 2. Base y Tipografía --- */
+body { 
+    font-family: 'Inter', sans-serif; 
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+}
+
+.font-display { 
+    font-family: 'Playfair Display', serif; 
+}
+
+/* Clases de Color (Utilidades) */
+.text-primary { color: var(--primary); }
+.text-secondary { color: var(--secondary); }
+.bg-primary { background-color: var(--primary); }
+.bg-secondary { background-color: var(--secondary); }
+.bg-accent { background-color: var(--accent); }
+
+/* --- 3. Componentes Genéricos --- */
+.card-hover { 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+}
+
+.card-hover:hover { 
+    transform: translateY(-4px); 
+    box-shadow: 0 10px 25px rgba(198, 93, 0, 0.1);
+}
+
+/* Estilos de Focus para Formulario */
+input:focus, select:focus, textarea:focus {
+    border-color: var(--primary) !important;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(198, 93, 0, 0.15) !important;
+}
+
+/* --- 4. Sección Creadores (Responsive Adaptado) --- */
+.creadores-section {
+    background: linear-gradient(to bottom, #ffffff, var(--bg-light));
+    padding: 80px 0;
+}
+
+.creadores-grid {
+    /* MÓVIL ESTÁNDAR (375px - 599px) - Scenarios 1-3 */
+    display: grid;
+    grid-template-columns: 1fr; /* Una sola columna en móvil */
+    gap: 30px; 
+    margin-top: 40px;
+}
+
+/* TABLET PEQUEÑA (sm: 640px - Scenario 4) */
+@media (min-width: 640px) {
+    .creadores-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columnas */
+        gap: 35px;
+    }
+}
+
+/* TABLET GRANDE (md: 768px - Scenario 5) */
+@media (min-width: 768px) {
+    .creadores-grid {
+        grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+        gap: 30px;
+    }
+}
+
+/* DESKTOP BASE (lg: 1024px - Scenario 6) */
+@media (min-width: 1024px) {
+    .creadores-grid {
+        grid-template-columns: repeat(4, 1fr); /* 4 columnas */
+    }
+}
+
+/* Estilos de Tarjeta de Creadores */
+.creador-card {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    padding: 30px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #f3f4f6;
+}
+.creador-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(198, 93, 0, 0.15);
+    border-color: var(--secondary);
+}
+.creador-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+}
+.creador-foto {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 15px;
+    border: 3px solid white;
+    box-shadow: 0 0 0 3px var(--secondary);
+}
+.creador-nombre {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 4px;
+}
+.creador-rol {
+    font-size: 0.85rem;
+    color: var(--primary);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 15px;
+}
+.creador-contacto p {
+    font-size: 0.85rem;
+    color: var(--text-medium);
+    margin-bottom: 4px;
+}
+
+/* --- 5. Info de Contacto y Mapa (Responsive Adaptado) --- */
+
+/* Aseguramos la altura del mapa en todos los dispositivos */
+#contactMap {
+    width: 100%;
+    min-height: 350px; /* Altura cómoda en móvil */
+    border-radius: 0.75rem;
+    z-index: 1; 
+    border: 1px solid #e5e7eb;
+}
+
+/* TABLET GRANDE y DESKTOP (900px+) */
+@media (min-width: 900px) {
+    /* La estructura principal de 1 columna de info + 2 columnas de mapa se maneja con Tailwind (lg:grid-cols-3) */
+    #contactMap {
+        min-height: 100%; /* Asegura que el mapa se estire a la altura de la columna de info */
+    }
+}
+
+
+/* --- 6. Acordeón (FAQ) --- */
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+    background-color: #fcfcfc;
+    border-top: 1px solid #f3f4f6;
+}

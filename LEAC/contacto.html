@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - LEAC Explora los Tesoros del Perú</title>
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <link rel="stylesheet" href="Styles/contacto.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="index.html" class="flex items-center group cursor-pointer">
+                    <h1 class="font-display text-2xl font-bold text-primary group-hover:opacity-80 transition-opacity">LEAC</h1>
+                    <span class="ml-2 text-sm text-gray-600">Explora Perú</span>
+                </a>
+
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-primary transition-colors">Inicio</a>
+                    <a href="destinos.html" class="text-gray-700 hover:text-primary transition-colors">Destinos</a>
+                    <a href="hoteles.html" class="text-gray-700 hover:text-primary transition-colors">Hoteles</a>
+                    <a href="perfil.html" class="text-gray-700 hover:text-primary transition-colors">Mi Perfil</a>
+                    <a href="contacto.html" class="text-primary font-semibold">Contáctanos</a>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <button id="loginBtn" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-colors">
+                        Iniciar Sesión
+                    </button>
+                    
+                    <div id="userProfile" class="hidden flex items-center space-x-2 cursor-pointer">
+                        <img id="userAvatar" src="" alt="Avatar" class="w-8 h-8 rounded-full border border-gray-200">
+                        <div class="flex flex-col items-start leading-tight">
+                            <span id="userName" class="text-sm font-medium hidden md:block"></span>
+                            <span id="userLevel" class="px-2 py-0.5 text-[10px] rounded-full bg-secondary text-white font-bold uppercase"></span>
+                        </div>
+                    </div>
+
+                    <button id="mobileMenuBtn" class="md:hidden text-gray-600 hover:text-primary focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full left-0 shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html" class="block px-3 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md">Inicio</a>
+                <a href="destinos.html" class="block px-3 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md">Destinos</a>
+                <a href="hoteles.html" class="block px-3 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md">Hoteles</a>
+                <a href="perfil.html" class="block px-3 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md">Mi Perfil</a>
+                <a href="contacto.html" class="block px-3 py-2 text-primary font-semibold rounded-md bg-gray-50">Contáctanos</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="pt-24 pb-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="font-display text-5xl md:text-6xl font-bold text-primary mb-4">
+                    Contáctanos
+                </h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Estamos aquí para ayudarte a planificar tu próxima aventura en el Perú
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="creadores-section">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="font-display text-4xl font-bold text-primary text-center mb-12">Equipo Fundador</h2>
+        <div class="creadores-grid">
+
+            <div class="creador-card male">
+                <img src="img/Lloyd_Cardenas.png" alt="Foto Creador 1" class="creador-foto">
+                <h3 class="creador-nombre">Lloyd C.A.</h3>
+                <p class="creador-rol">Co-Fundador & CEO</p>
+                <div class="creador-contacto">
+                    <p>📧 lloyd.cardenas@leac-peru.com</p>
+                    <p>📞 +51 973 179 579</p>
+                </div>
+            </div>
+
+            <div class="creador-card male">
+                <img src="img/Elias_CV.jpg" alt="Foto Creador 2" class="creador-foto">
+                <h3 class="creador-nombre">Elías C.V.</h3>
+                <p class="creador-rol">Co-Fundador & CTO</p>
+                <div class="creador-contacto">
+                    <p>📧 elias.caballero@leac-peru.com</p>
+                    <p>📞 +51 992 186 669</p>
+                </div>
+            </div>
+
+            <div class="creador-card female">
+                <img src="img/Andrea_MR.jpeg" alt="Foto Creadora 3" class="creador-foto">
+                <h3 class="creador-nombre">Andrea M.R.</h3>
+                <p class="creador-rol">Co-Fundadora & CMO</p>
+                <div class="creador-contacto">
+                    <p>📧 andrea.riveros@leac-peru.com</p>
+                    <p>📞 +51 903 104 513</p>
+                </div>
+            </div>
+
+            <div class="creador-card female">
+                <img src="img/Cassandra_VS.jpeg" alt="Foto Creadora 4" class="creador-foto">
+                <h3 class="creador-nombre">Cassandra V.S.</h3>
+                <p class="creador-rol">Co-Fundadora & CXO</p>
+                <div class="creador-contacto">
+                    <p>📧 cassandra.valverde@leac-peru.com</p>
+                    <p>📞 +51 937 476 928</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+    <section class="py-16 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <div class="lg:col-span-1 space-y-6">
+                    
+                    <div class="bg-white rounded-xl shadow-lg p-6 flex items-center card-hover">
+                        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4 text-2xl">📞</div>
+                        <div><h3 class="font-bold text-gray-800">Llámanos</h3><p class="text-sm text-gray-600">+51 992 186 669</p></div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-lg p-6 flex items-center card-hover">
+                        <div class="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center mr-4 text-2xl">📧</div>
+                        <div><h3 class="font-bold text-gray-800">Escríbenos</h3><p class="text-sm text-gray-600">info@leac-peru.com</p></div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-lg p-6 flex items-center card-hover">
+                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4 text-2xl">📍</div>
+                        <div><h3 class="font-bold text-gray-800">Visítanos</h3><p class="text-sm text-gray-600">Av. Larco 1234, Trujillo</p></div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-xl shadow-lg p-2 h-full min-h-[400px]">
+                        <div id="contactMap" class="w-full h-full rounded-lg z-0"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 md:p-12">
+                <h2 class="font-display text-3xl font-bold text-primary mb-2 text-center">Envíanos un Mensaje</h2>
+                <p class="text-center text-gray-500 mb-8">Te responderemos en menos de 24 horas.</p>
+                
+                <form id="contactForm" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="firstName" class="block text-sm font-medium text-gray-700 mb-2">Nombre</label>
+                            <input type="text" id="firstName" name="firstName" required 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                        </div>
+                        <div>
+                            <label for="lastName" class="block text-sm font-medium text-gray-700 mb-2">Apellido</label>
+                            <input type="text" id="lastName" name="lastName" required 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                            <input type="email" id="email" name="email" required 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                        </div>
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Teléfono</label>
+                            <input type="tel" id="phone" name="phone" 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">Asunto</label>
+                        <select id="subject" name="subject" required 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                            <option value="">Selecciona un asunto</option>
+                            <option value="reservation">Reservas</option>
+                            <option value="information">Información General</option>
+                            <option value="complaint">Sugerencias/Reclamos</option>
+                            <option value="partnership">Alianzas</option>
+                            <option value="other">Otro</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Mensaje</label>
+                        <textarea id="message" name="message" rows="6" required 
+                                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" 
+                                  placeholder="Cuéntanos cómo podemos ayudarte..."></textarea>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <input type="checkbox" id="privacy" name="privacy" required 
+                               class="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary">
+                        <label for="privacy" class="ml-2 text-sm text-gray-600">
+                            Acepto la política de privacidad y el tratamiento de mis datos
+                        </label>
+                    </div>
+                    
+                    <div class="text-center">
+                        <button type="submit" class="bg-primary text-white px-8 py-3 rounded-lg hover:bg-opacity-90 transition-colors font-semibold">
+                            Enviar Mensaje
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="font-display text-3xl font-bold text-primary mb-12 text-center">Métodos de Pago Aceptados</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover">
+                    <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white font-bold text-lg">Y</span>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2">Yape</h3>
+                    <p class="text-gray-600 text-sm mb-4">Pago móvil instantáneo</p>
+                    <div class="bg-gray-50 rounded-lg p-3">
+                        <p class="text-xs text-gray-600">Código: 987654321</p>
+                        <p class="text-xs text-gray-600">Nombre: LEAC Perú</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover">
+                    <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white font-bold text-lg">PP</span>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2">PayPal</h3>
+                    <p class="text-gray-600 text-sm mb-4">Pago seguro internacional</p>
+                    <div class="bg-gray-50 rounded-lg p-3">
+                        <p class="text-xs text-gray-600">Email: pagos@leac-peru.com</p>
+                        <p class="text-xs text-gray-600">Comisión: 3.5%</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover">
+                    <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white font-bold text-lg">💳</span>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2">Tarjeta de Crédito</h3>
+                    <p class="text-gray-600 text-sm mb-4">Visa, Mastercard, Amex</p>
+                    <div class="bg-gray-50 rounded-lg p-3">
+                        <p class="text-xs text-gray-600">Cuotas disponibles</p>
+                        <p class="text-xs text-gray-600">Seguro y protegido</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center card-hover">
+                    <div class="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white font-bold text-lg">🏦</span>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2">Transferencia Bancaria</h3>
+                    <p class="text-gray-600 text-sm mb-4">Desde cualquier banco</p>
+                    <div class="bg-gray-50 rounded-lg p-3">
+                        <p class="text-xs text-gray-600">CCI: 12345678901234567890</p>
+                        <p class="text-xs text-gray-600">Banco: BCP</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="font-display text-3xl font-bold text-primary mb-12 text-center">Preguntas Frecuentes</h2>
+            
+            <div class="space-y-4">
+                <div class="border border-gray-200 rounded-lg">
+                    <button class="accordion-header w-full text-left p-6 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50" 
+                            onclick="toggleAccordion(this)">
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-semibold text-lg">¿Cómo hago una reserva?</h3>
+                            <span class="accordion-icon text-2xl text-primary">+</span>
+                        </div>
+                    </button>
+                    <div class="accordion-content px-6 pb-6">
+                        <p class="text-gray-600">
+                            Hacer una reserva es muy simple: selecciona tu destino preferido, elige las fechas de viaje, 
+                            completa el formulario de reserva y realiza el pago. Recibirás una confirmación por email 
+                            en menos de 24 horas.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg">
+                    <button class="accordion-header w-full text-left p-6 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50" 
+                            onclick="toggleAccordion(this)">
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-semibold text-lg">¿Cuáles son los métodos de pago disponibles?</h3>
+                            <span class="accordion-icon text-2xl text-primary">+</span>
+                        </div>
+                    </button>
+                    <div class="accordion-content px-6 pb-6">
+                        <p class="text-gray-600">
+                            Aceptamos Yape, PayPal, tarjetas de crédito (Visa, Mastercard, American Express) y 
+                            transferencias bancarias. Todos los métodos son seguros y protegidos.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg">
+                    <button class="accordion-header w-full text-left p-6 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50" 
+                            onclick="toggleAccordion(this)">
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-semibold text-lg">¿Puedo cancelar o modificar mi reserva?</h3>
+                            <span class="accordion-icon text-2xl text-primary">+</span>
+                        </div>
+                    </button>
+                    <div class="accordion-content px-6 pb-6">
+                        <p class="text-gray-600">
+                            Sí, puedes cancelar o modificar tu reserva hasta 48 horas antes de la fecha de inicio del viaje. 
+                            Las cancelaciones con más de 7 días de anticipación tienen un reembolso completo.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg">
+                    <button class="accordion-header w-full text-left p-6 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50" 
+                            onclick="toggleAccordion(this)">
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-semibold text-lg">¿Cómo funciona el sistema de puntos?</h3>
+                            <span class="accordion-icon text-2xl text-primary">+</span>
+                        </div>
+                    </button>
+                    <div class="accordion-content px-6 pb-6">
+                        <p class="text-gray-600">
+                            Por cada $1 que gastas, recibes 10 puntos. Los puntos se acumulan para subir de nivel 
+                            (Plata, Oro, Diamante) y pueden canjearse por descuentos, upgrades y viajes gratis.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg">
+                    <button class="accordion-header w-full text-left p-6 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50" 
+                            onclick="toggleAccordion(this)">
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-semibold text-lg">¿Los precios incluyen todo?</h3>
+                            <span class="accordion-icon text-2xl text-primary">+</span>
+                        </div>
+                    </button>
+                    <div class="accordion-content px-6 pb-6">
+                        <p class="text-gray-600">
+                            Nuestros precios incluyen alojamiento, transporte interno, guías turísticos y entradas a las atracciones. 
+                            Los vuelos internacionales y algunas comidas no están incluidos, salvo que se especifique lo contrario.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="font-display text-2xl font-bold text-secondary mb-4">LEAC</h3>
+                    <p class="text-gray-300 mb-4">
+                        Explorando los tesoros del Perú con pasión y profesionalismo desde 2025.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-secondary">📘</a>
+                        <a href="#" class="text-gray-300 hover:text-secondary">📷</a>
+                        <a href="#" class="text-gray-300 hover:text-secondary">🐦</a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Destinos</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="destinos.html" class="hover:text-secondary transition-colors">Machu Picchu</a></li>
+                        <li><a href="destinos.html" class="hover:text-secondary transition-colors">Lima</a></li>
+                        <li><a href="destinos.html" class="hover:text-secondary transition-colors">Cusco</a></li>
+                        <li><a href="destinos.html" class="hover:text-secondary transition-colors">Arequipa</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Servicios</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="hoteles.html" class="hover:text-secondary transition-colors">Hoteles</a></li>
+                        <li><a href="perfil.html" class="hover:text-secondary transition-colors">Mi Perfil</a></li>
+                        <li><a href="perfil.html" class="hover:text-secondary transition-colors">Sistema de Puntos</a></li>
+                        <li><a href="contacto.html" class="hover:text-secondary transition-colors">Soporte</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Contacto</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li>📞 +51 992 186 669</li>
+                        <li>📧 info@leac-peru.com</li>
+                        <li>📍 Trujillo, Perú</li> <li>🕒 24/7 Soporte</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-300">
+                <p>&copy; 2025 LEAC Explora los Tesoros del Perú. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="loginModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center">
+         <div class="bg-white p-8 rounded-lg shadow-xl border-t-4 border-primary">
+            <p class="text-gray-600">Módulo de acceso.</p>
+            <button id="closeModal" class="mt-4 text-primary font-bold hover:underline">Cerrar</button>
+         </div>
+    </div>
+
+    <script src="Js/main.js"></script>
+    <script src="Js/contacto.js"></script>
+</body>
+</html>

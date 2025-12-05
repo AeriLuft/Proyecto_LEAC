@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil - LEAC</title>
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <link rel="stylesheet" href="Styles/perfil.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50 font-sans text-gray-800">
+
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="index.html" class="flex items-center group cursor-pointer">
+                    <h1 class="font-display text-2xl font-bold text-primary group-hover:opacity-80 transition-opacity">LEAC</h1>
+                    <span class="ml-2 text-sm text-gray-600">Explora Perú</span>
+                </a>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-primary transition-colors">Inicio</a>
+                    <a href="destinos.html" class="text-gray-700 hover:text-primary transition-colors">Destinos</a>
+                    <a href="hoteles.html" class="text-gray-700 hover:text-primary transition-colors">Hoteles</a>
+                    <a href="perfil.html" class="text-primary font-semibold">Mi Perfil</a>
+                    <a href="contacto.html" class="text-gray-700 hover:text-primary transition-colors">Contáctanos</a>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <button id="loginBtn" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-colors hidden">Iniciar Sesión</button>
+                    <div id="userProfile" class="flex items-center space-x-2">
+                        <img id="userAvatar" src="" alt="Avatar" class="w-8 h-8 rounded-full border border-gray-200">
+                        <div class="flex flex-col items-start leading-tight">
+                            <span id="userName" class="text-sm font-medium hidden md:block"></span>
+                            <span id="userLevel" class="px-2 py-0.5 text-[10px] rounded-full bg-secondary text-white font-bold uppercase"></span>
+                        </div>
+                    </div>
+                    
+                    <button id="mobileMenuBtn" class="md:hidden text-gray-600 hover:text-primary focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full left-0 shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html" class="block px-3 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md">Inicio</a>
+                <a href="destinos.html" class="block px-3 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md">Destinos</a>
+                <a href="hoteles.html" class="block px-3 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md">Hoteles</a>
+                <a href="perfil.html" class="block px-3 py-2 text-primary font-semibold rounded-md bg-gray-50">Mi Perfil</a>
+                <a href="contacto.html" class="block px-3 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md">Contáctanos</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="pt-24 pb-12 min-h-screen">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+                <div class="lg:col-span-1">
+                    <div class="card-profile p-8 text-center sticky top-24 border border-gray-100">
+                        
+                        <div class="relative inline-block mb-6">
+                            <img id="profileAvatar" src="img/default_avatar.png" alt="Avatar" class="w-32 h-32 rounded-full mx-auto border-4 border-primary object-cover shadow-md">
+                        </div>
+                        <h2 id="profileName" class="font-display text-2xl font-bold text-gray-900 mb-1">Cargando...</h2>
+                        <p id="profileEmail" class="text-gray-500 mb-6 text-sm">cargando@email.com</p>
+
+                        <div class="bg-gray-50 border border-gray-200 rounded-lg p-4 mb-6">
+                            <span id="profileLevel" class="px-3 py-1 text-xs font-bold rounded-full bg-secondary text-white uppercase tracking-wider">NIVEL</span>
+                            <p class="text-xs text-gray-500 mt-2">Miembro desde 2025</p>
+                        </div>
+
+                        <div class="space-y-4 text-left bg-gray-50 p-4 rounded-lg mb-6 border border-gray-100">
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600 text-sm">Puntos Disponibles:</span>
+                                <span class="font-bold text-primary text-lg" id="totalPoints">0</span>
+                            </div>
+                            <div class="flex justify-between items-center border-t border-gray-200 pt-2">
+                                <span class="text-gray-600 text-sm">Puntos Históricos:</span>
+                                <span class="font-semibold text-gray-800" id="lifetimePoints">0</span>
+                            </div>
+                            <div class="flex justify-between items-center border-t border-gray-200 pt-2">
+                                <span class="text-gray-600 text-sm">Viajes:</span>
+                                <span class="font-semibold text-gray-800" id="totalTrips">0</span>
+                            </div>
+                        </div>
+
+                        <button id="showEditBtn" class="w-full bg-white border border-gray-300 text-gray-700 py-2 rounded-lg hover:bg-gray-50 transition-colors font-medium text-sm mb-4">
+                            ✏️ Editar Perfil
+                        </button>
+
+                        <form id="editProfileForm" class="hidden space-y-4 bg-gray-50 p-4 rounded-lg border border-gray-200 mb-6 text-left">
+                            <h4 class="font-bold text-gray-800 text-sm mb-2">Editar Datos</h4>
+                            <div><label class="text-xs text-gray-500 block mb-1">Nombre</label><input type="text" id="editName" class="input-leac text-sm" required></div>
+                            <div><label class="text-xs text-gray-500 block mb-1">Email</label><input type="email" id="editEmail" class="input-leac text-sm" required></div>
+                            <div><label class="text-xs text-gray-500 block mb-1">Foto</label><input type="file" id="newAvatar" accept="image/*" class="text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20"></div>
+                            <div class="flex space-x-2 pt-2">
+                                <button type="button" id="cancelEditBtn" class="flex-1 bg-gray-200 text-gray-700 py-2 rounded-lg text-xs font-bold">Cancelar</button>
+                                <button type="submit" class="flex-1 bg-primary text-white py-2 rounded-lg text-xs font-bold hover:bg-opacity-90">Guardar</button>
+                            </div>
+                        </form>
+
+                        <div class="space-y-2">
+                            <button id="btnCanjearPuntos" class="btn-leac w-full py-3 text-sm bg-green-500 text-white hover:bg-green-600">🎁 Ir a Tienda</button>
+                            <button id="logoutBtnPerfil" class="w-full text-red-500 py-2 text-sm hover:underline">Cerrar Sesión</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-2 space-y-8">
+                    
+                    <div class="card-profile p-8 border border-gray-100">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="font-display text-2xl font-bold text-gray-900">Tu Nivel</h3>
+                            <span class="text-sm text-gray-500">Siguiente meta: <strong class="text-primary" id="nextLevelName">DIAMANTE</strong></span>
+                        </div>
+                        <div class="mb-8">
+                            <div class="flex justify-between items-center mb-2 text-sm">
+                                <span class="font-bold text-secondary" id="currentLevelName">Oro</span>
+                                <span class="text-gray-500"><span id="pointsDisplay">0</span> / <span id="pointsNextLevel">5,000</span></span>
+                            </div>
+                            <div class="progress-bar-container">
+                                <div id="progressBar" class="progress-bar-fill" style="width: 0%"></div>
+                            </div>
+                            <p class="text-xs text-gray-400 mt-2 text-right">Faltan <span id="pointsNeeded">0</span> pts para subir.</p>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 text-center">
+                            <div class="p-4 bg-gray-50 rounded-lg"><div class="text-xl font-bold text-primary" id="nextLevelProgress">0%</div><p class="text-xs text-gray-500">Progreso</p></div>
+                            <div class="p-4 bg-gray-50 rounded-lg"><div class="text-xl font-bold text-green-600" id="currentDiscount">0%</div><p class="text-xs text-gray-500">Descuento</p></div>
+                            <div class="p-4 bg-gray-50 rounded-lg"><div class="text-xl font-bold text-gray-700">$245</div><p class="text-xs text-gray-500">Ahorrado</p></div>
+                        </div>
+                    </div>
+
+                    <div class="card-profile p-8 border border-gray-100">
+                        <h3 class="font-display text-2xl font-bold text-gray-900 mb-6">Crecimiento de Puntos</h3>
+                        <div id="pointsChart" style="height: 350px; width: 100%;"></div>
+                    </div>
+
+                    <div id="rewardsShop" class="card-profile p-8 border border-gray-100">
+                        <h3 class="font-display text-2xl font-bold text-gray-900 mb-2">Tienda de Recompensas</h3>
+                        <p class="text-gray-500 text-sm mb-6">Canjea tus puntos. ¡Tu nivel no bajará!</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="border border-gray-200 rounded-xl p-6 hover:border-primary transition-colors">
+                                <div class="flex justify-between mb-4"><span class="text-2xl">🎫</span><span class="bg-primary/10 text-primary text-xs font-bold px-2 py-1 rounded-full">1000 pts</span></div>
+                                <h4 class="font-bold text-lg mb-1">Descuento de Viaje</h4>
+                                <p class="text-gray-500 text-sm mb-4">$10 USD de descuento directo.</p>
+                                <button class="btn-outline-leac w-full py-2 text-sm btn-redeem" data-cost="1000" data-name="Descuento de Viaje">Canjear</button>
+                            </div>
+                            <div class="border border-gray-200 rounded-xl p-6 hover:border-primary transition-colors">
+                                <div class="flex justify-between mb-4"><span class="text-2xl">🏨</span><span class="bg-primary/10 text-primary text-xs font-bold px-2 py-1 rounded-full">2000 pts</span></div>
+                                <h4 class="font-bold text-lg mb-1">Upgrade de Hotel</h4>
+                                <p class="text-gray-500 text-sm mb-4">Mejora tu habitación a Suite.</p>
+                                <button class="btn-outline-leac w-full py-2 text-sm btn-redeem" data-cost="2000" data-name="Upgrade de Hotel">Canjear</button>
+                            </div>
+                            <div class="border border-gray-200 rounded-xl p-6 hover:border-primary transition-colors">
+                                <div class="flex justify-between mb-4"><span class="text-2xl">🎁</span><span class="bg-primary/10 text-primary text-xs font-bold px-2 py-1 rounded-full">1500 pts</span></div>
+                                <h4 class="font-bold text-lg mb-1">Kit de Bienvenida</h4>
+                                <p class="text-gray-500 text-sm mb-4">Mochila, termo y guía LEAC.</p>
+                                <button class="btn-outline-leac w-full py-2 text-sm btn-redeem" data-cost="1500" data-name="Kit de Bienvenida">Canjear</button>
+                            </div>
+                            <div class="border border-gray-100 rounded-xl p-6 bg-gray-50 opacity-70">
+                                <div class="flex justify-between mb-4"><span class="text-2xl">✈️</span><span class="bg-gray-200 text-gray-500 text-xs font-bold px-2 py-1 rounded-full">5000 pts</span></div>
+                                <h4 class="font-bold text-gray-400 text-lg mb-1">Viaje Gratis</h4>
+                                <p class="text-gray-400 text-sm mb-4">Solo para nivel Diamante.</p>
+                                <button class="w-full py-2 text-sm text-gray-400 font-bold border border-gray-300 rounded-lg cursor-not-allowed">Bloqueado</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-profile p-8 border border-gray-100">
+                        <h3 class="font-display text-xl font-bold text-gray-900 mb-6">Historial de Canjes</h3>
+                        <div class="overflow-x-auto">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Recompensa</th>
+                                        <th>Fecha</th>
+                                        <th class="text-right">Costo</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="redemptionHistoryList">
+                                    </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="redemptionModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[60] hidden flex items-center justify-center">
+        <div class="bg-white rounded-xl shadow-2xl max-w-sm w-full mx-4 overflow-hidden transform" id="redemptionModalContent">
+            <div class="p-6 text-center">
+                <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl text-primary">🎁</div>
+                <h3 class="font-display text-xl font-bold text-gray-900 mb-2">Confirmar Canje</h3>
+                <p class="text-gray-600 mb-6 text-sm">
+                    Canjearás <strong id="modalItemName" class="text-primary">...</strong> por <span id="modalItemCost" class="font-bold text-gray-900">...</span> puntos.
+                </p>
+                <div class="flex space-x-3">
+                    <button id="cancelRedeemBtn" class="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 font-bold text-sm">Cancelar</button>
+                    <button id="confirmRedeemBtn" class="flex-1 px-4 py-2 bg-primary text-white rounded-lg hover:bg-opacity-90 font-bold text-sm shadow-md">Sí, Canjear</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="font-display text-2xl font-bold text-secondary mb-4">LEAC</h3>
+                    <p class="text-gray-300 mb-4">Explorando los tesoros del Perú con pasión y profesionalismo desde 2025.</p>
+                </div>
+                <div><h4 class="font-semibold text-lg mb-4">Destinos</h4><ul class="space-y-2 text-gray-300"><li><a href="destinos.html" class="hover:text-secondary transition-colors">Machu Picchu</a></li><li><a href="destinos.html" class="hover:text-secondary transition-colors">Lima</a></li><li><a href="destinos.html" class="hover:text-secondary transition-colors">Cusco</a></li><li><a href="destinos.html" class="hover:text-secondary transition-colors">Arequipa</a></li></ul></div>
+                <div><h4 class="font-semibold text-lg mb-4">Servicios</h4><ul class="space-y-2 text-gray-300"><li><a href="hoteles.html" class="hover:text-secondary transition-colors">Hoteles</a></li><li><a href="perfil.html" class="hover:text-secondary transition-colors">Mi Perfil</a></li><li><a href="perfil.html" class="hover:text-secondary transition-colors">Sistema de Puntos</a></li><li><a href="contacto.html" class="hover:text-secondary transition-colors">Soporte</a></li></ul></div>
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Contacto</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li>📞 +51 992 186 669</li>
+                        <li>📧 info@leac-peru.com</li>
+                        <li>📍 Trujillo, Perú</li>
+                        <li>🕒 24/7 Soporte</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-300">
+                <p>&copy; 2025 LEAC Explora los Tesoros del Perú. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="Js/main.js"></script>
+    <script src="Js/perfil.js"></script>
+</body>
+</html>

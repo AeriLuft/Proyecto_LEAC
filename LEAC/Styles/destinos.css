@@ -1,0 +1,12 @@
+body { font-family: 'Inter', sans-serif; }
+        .font-display { font-family: 'Playfair Display', serif; }
+        .text-primary { color: #C65D00; }
+        .text-secondary { color: #D4A574; }
+        .text-accent { color: #2D5A27; }
+        .bg-primary { background-color: #C65D00; }
+        .bg-secondary { background-color: #D4A574; }
+        .bg-accent { background-color: #2D5A27; }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .star-rating { color: #FFD700; }
+        .filter-active { background-color: #C65D00; color: white; }

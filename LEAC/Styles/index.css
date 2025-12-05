@@ -1,0 +1,71 @@
+/* Styles/index.css - Base de Diseño LEAC */
+
+/* --- 1. Variables de Diseño --- */
+:root {
+    --primary: #C65D00;   /* Naranja Principal */
+    --secondary: #D4A574; /* Dorado/Arena */
+    --accent: #2D5A27;    /* Verde */
+    --text-dark: #1f2937;
+    --star-gold: #FFD700;
+}
+
+/* --- 2. Base y Tipografía --- */
+body { 
+    font-family: 'Inter', sans-serif; 
+    /* Scroll suave para los clics en los botones del Hero */
+    scroll-behavior: smooth;
+}
+
+.font-display { 
+    font-family: 'Playfair Display', serif; 
+}
+
+/* --- 3. Clases de Color --- */
+.text-primary { color: var(--primary); }
+.text-secondary { color: var(--secondary); }
+.text-accent { color: var(--accent); }
+.bg-primary { background-color: var(--primary); }
+.bg-secondary { background-color: var(--secondary); }
+.bg-accent { background-color: var(--accent); }
+
+/* Fondo Hero (si no se usa la imagen) */
+.hero-bg { 
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); 
+}
+
+/* --- 4. Componentes y Animaciones --- */
+
+/* Tarjetas */
+.card-hover { 
+    transition: all 0.3s ease; 
+    will-change: transform, box-shadow; /* Optimización de rendimiento */
+}
+.card-hover:hover { 
+    /* El valor de translateY y shadow es alto para darle impacto */
+    transform: translateY(-8px); 
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1); 
+}
+
+/* Estrellas de valoración */
+.star-rating { 
+    color: var(--star-gold); 
+}
+
+/* Fondo de Partículas (P5.js) */
+#p5-canvas { 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    z-index: -1; 
+}
+
+/* --- 5. Adaptación Responsive (General) --- */
+/* Las adaptaciones específicas de grid y texto (col-span, text-xxl) se manejan
+   directamente en el HTML con prefijos de Tailwind (sm:, md:, lg:) */
+
+/* Ajuste general para el Hero en pantallas muy estrechas (Scenario 1) */
+@media (max-width: 380px) {
+    #heroTitle {
+        font-size: 3rem !important; /* Asegurar que no se salga en móviles pequeños */
+    }
+}

@@ -1,0 +1,65 @@
+/* Styles/hoteles.css - Final Sincronizado y Responsive */
+
+/* --- 1. Base y Globales --- */
+html {
+    scroll-behavior: smooth; 
+}
+body { 
+    font-family: 'Inter', sans-serif; 
+}
+.font-display { 
+    font-family: 'Playfair Display', serif; 
+}
+
+/* --- 2. Colores y Branding --- */
+.text-primary { color: #C65D00; }
+.text-secondary { color: #D4A574; }
+.bg-primary { background-color: #C65D00; }
+.bg-secondary { background-color: #D4A574; }
+.star-rating { color: #FFD700; }
+
+/* --- 3. Tarjetas y Hover --- */
+.card-hover { 
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+    will-change: transform, box-shadow;
+}
+.card-hover:hover { 
+    transform: translateY(-8px); 
+    box-shadow: 0 20px 40px rgba(198, 93, 0, 0.15); 
+}
+
+/* --- 4. MAPA (Leaflet) --- */
+#map { 
+    width: 100%;
+    height: 500px; /* Altura estándar en desktop */
+    border-radius: 12px; 
+    z-index: 1;          
+    border: 1px solid #e5e7eb;
+}
+
+/* TABLET/MOBILE (Ajuste de altura del mapa si es necesario, aunque el 500px es un buen mínimo) */
+@media (max-width: 767px) {
+    #map {
+        height: 350px; /* Reducir altura en pantallas más pequeñas */
+    }
+}
+
+/* Estilos de Popups de Leaflet (Para mantener la marca) */
+.leaflet-popup-content h3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    color: #C65D00 !important;
+    font-size: 1.1rem;
+}
+
+/* --- 5. Filtros --- */
+select {
+    cursor: pointer;
+    /* Estilos de flecha */
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
+    appearance: none;
+}

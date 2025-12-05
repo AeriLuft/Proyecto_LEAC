@@ -1,0 +1,113 @@
+/* Styles/perfil.css - Sincronizado con LEAC Design System */
+
+/* --- 1. Tipografía y Base (Idéntico a hoteles.css) --- */
+body { 
+    font-family: 'Inter', sans-serif; 
+    background-color: #f9fafb; /* bg-gray-50 */
+    color: #1f2937; /* text-gray-800 */
+}
+
+.font-display { 
+    font-family: 'Playfair Display', serif;
+}
+
+/* --- 2. Colores de Marca LEAC (Definición Centralizada) --- */
+:root {
+    --primary: #C65D00;   /* Naranja LEAC */
+    --secondary: #D4A574; /* Dorado/Arena */
+    --text-dark: #1f2937;
+}
+
+/* Clases de utilidad para forzar colores si Tailwind falla */
+.text-primary { color: var(--primary) !important; }
+.bg-primary { background-color: var(--primary) !important; }
+.border-primary { border-color: var(--primary) !important; }
+
+.text-secondary { color: var(--secondary) !important; }
+.bg-secondary { background-color: var(--secondary) !important; }
+
+/* --- 3. Componentes UI (Botones y Tarjetas) --- */
+.card-profile {
+    background: white;
+    border-radius: 0.75rem; /* rounded-xl */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-profile:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Botones Principales (Estilo LEAC) */
+.btn-leac {
+    background-color: var(--primary);
+    color: white;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px -1px rgba(198, 93, 0, 0.2);
+}
+
+.btn-leac:hover {
+    background-color: #a04b00; /* Un poco más oscuro */
+    transform: scale(1.02);
+}
+
+/* Botones de Tienda (Bordeado) */
+.btn-outline-leac {
+    background-color: white;
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    font-weight: 700;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.btn-outline-leac:hover {
+    background-color: var(--primary);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(198, 93, 0, 0.2);
+}
+
+/* --- 4. Elementos Específicos --- */
+/* Barra de progreso */
+.progress-bar-container {
+    background-color: #f3f4f6; /* gray-100 */
+    border-radius: 9999px;
+    height: 1rem;
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.progress-bar-fill {
+    background: linear-gradient(90deg, #D4A574 0%, #C65D00 100%); /* De Secondary a Primary */
+    height: 100%;
+    border-radius: 9999px;
+    transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Tabla de Historial */
+table { width: 100%; border-collapse: separate; border-spacing: 0; }
+th { color: #6b7280; font-weight: 600; font-size: 0.875rem; padding: 1rem; border-bottom: 2px solid #f3f4f6; }
+td { padding: 1rem; border-bottom: 1px solid #f9fafb; font-size: 0.95rem; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background-color: #fffbf7; /* Un toque muy sutil de naranja/crema al hover */ }
+
+/* Inputs del Formulario */
+.input-leac {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    transition: all 0.2s;
+}
+.input-leac:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(198, 93, 0, 0.1);
+}
+
+/* Gráfico */
+#pointsChart { width: 100%; min-height: 350px; }
